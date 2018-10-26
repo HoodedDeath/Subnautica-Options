@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.IO;
 using System.IO.Compression;
+using System.Threading;
 
 namespace Subnautica_Options
 {
@@ -291,6 +292,12 @@ namespace Subnautica_Options
 
         private void BackupButton_Click(object sender, EventArgs e)
         {
+            //
+            //LoadingForm lf = new LoadingForm();
+            //lf.Show();
+            Thread thread = new Thread(new ThreadStart(LoadingThreadForm));
+            thread.Start();
+            //
             //Gets the selected item from the drop-down (which will be either nothing or one of the save folders)
             string item = comboBox1.SelectedItem.ToString();
             //Stores the path for the game save
@@ -360,10 +367,20 @@ namespace Subnautica_Options
                 //Result for backup was failure
                 result = false;
             }
+            //
+            //lf.Close();
+            //lf.Dispose();
+            thread.Abort();
+            //
             if (result)
                 MessageBox.Show("Backup completed");
             else
                 MessageBox.Show("Backup failed");
+        }
+        //Thread function for loading popup
+        private void LoadingThreadForm()
+        {
+            new LoadingForm().ShowDialog();
         }
 
         private void RestoreButton_Click(object sender, EventArgs e)
