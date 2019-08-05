@@ -52,23 +52,23 @@ namespace Subnautica_Options
             c.Save();
             //Called to fill in the drop-down box (Combo Box) with the available save files
             PopulateComboBox(c.Path);
-            //Called to make sure the files in the HoodedDeath folder in the user's Roaming folder exist
+            //Called to make sure the files in the HoodedDeathApplications folder in the user's Roaming folder exist
             WriteRoamingFiles();
         }
-        //Makes sure the files in the HoodedDeath folder in the user's Roaming folder exist
+        //Makes sure the files in the HoodedDeathApplications folder in the user's Roaming folder exist
         private void WriteRoamingFiles()
         {
             try
             {
-                //The HoodedDeath folder in the user's Roaming folder
-                string hdFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HoodedDeath");
-                //The folder specific to this application, inside the HoodedDeath folder
+                //The HoodedDeathApplications folder in the user's Roaming folder
+                string hdFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HoodedDeathApplications");
+                //The folder specific to this application, inside the HoodedDeathApplications folder
                 string folder = Path.Combine(hdFolder, "Subnautica Options");
                 //The file for telling the Death Game Launcher where the most recently opened executable of this application (incase there are multiple copies)
                 string roamingFile = Path.Combine(folder, "Subnautica Options.txt");
                 //The file for letting any user who finds this folder why the Subnautica Options.txt file is needed for the Death Game Launcher
                 string readmeFile = Path.Combine(folder, "readme.txt");
-                //Creates the HoodedDeath folder if it does not exist
+                //Creates the HoodedDeathApplications folder if it does not exist
                 if (!Directory.Exists(hdFolder))
                     Directory.CreateDirectory(hdFolder);
                 //Creates the Subnautica Options folder if it does not exist
